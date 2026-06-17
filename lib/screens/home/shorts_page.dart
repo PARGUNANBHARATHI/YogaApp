@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../data/shorts_data.dart';
-import 'widgets/short_video_player.dart';
-
 class ShortsPage extends StatelessWidget {
   const ShortsPage({super.key});
 
@@ -12,28 +9,20 @@ class ShortsPage extends StatelessWidget {
       backgroundColor: Colors.black,
 
       body: PageView.builder(
-
         scrollDirection: Axis.vertical,
 
-        itemCount: shorts.length,
+        itemCount: 5,
 
         itemBuilder: (context, index) {
-
-          final short = shorts[index];
-
           return Stack(
 
             fit: StackFit.expand,
 
             children: [
 
-              // ================= VIDEO =================
-
-              ShortVideoPlayer(
-                videoUrl: short.videoUrl,
+              Container(
+                color: Colors.black87,
               ),
-
-              // ================= OVERLAY =================
 
               Container(
 
@@ -50,20 +39,18 @@ class ShortsPage extends StatelessWidget {
                       Colors.transparent,
 
                       Colors.black.withValues(
-                        alpha: 0.75,
+                        alpha: 0.8,
                       ),
                     ],
                   ),
                 ),
               ),
 
-              // ================= CONTENT =================
-
               Positioned(
 
                 left: 20,
-                right: 90,
-                bottom: 110,
+                right: 20,
+                bottom: 120,
 
                 child: Column(
 
@@ -91,66 +78,62 @@ class ShortsPage extends StatelessWidget {
                         ),
                       ),
 
-                      child: Text(
+                      child: const Text(
 
-                        short.title,
+                        "Daily Wisdom",
 
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
-                          fontWeight:
-                              FontWeight.w600,
                         ),
                       ),
                     ),
 
                     const SizedBox(height: 16),
 
-                    Text(
+                    const Text(
 
-                      short.quote,
+                      "The quality of your life depends on how you experience life.",
 
-                      style: const TextStyle(
+                      style: TextStyle(
 
                         color: Colors.white,
 
                         fontSize: 24,
 
-                        height: 1.4,
-
                         fontWeight:
                             FontWeight.bold,
+
+                        height: 1.4,
                       ),
                     ),
                   ],
                 ),
               ),
 
-              // ================= ACTIONS =================
-
               Positioned(
 
                 right: 16,
-                bottom: 110,
+                bottom: 120,
 
                 child: Column(
 
                   children: [
 
-                    actionButton(
+                    _actionButton(
                       Icons.favorite_border,
                       "Save",
                     ),
 
-                    const SizedBox(height: 18),
+                    const SizedBox(height: 20),
 
-                    actionButton(
+                    _actionButton(
                       Icons.air,
                       "Breathe",
                     ),
 
-                    const SizedBox(height: 18),
+                    const SizedBox(height: 20),
 
-                    actionButton(
+                    _actionButton(
                       Icons.share,
                       "Share",
                     ),
@@ -164,10 +147,11 @@ class ShortsPage extends StatelessWidget {
     );
   }
 
-  Widget actionButton(
+  Widget _actionButton(
     IconData icon,
     String label,
   ) {
+
     return Column(
 
       children: [
@@ -178,7 +162,7 @@ class ShortsPage extends StatelessWidget {
 
           backgroundColor:
               Colors.white.withValues(
-            alpha: 0.12,
+            alpha: 0.15,
           ),
 
           child: Icon(

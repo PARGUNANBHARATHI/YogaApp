@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../widgets/program_details_page.dart';
+import 'food_manual_page.dart';
 
 class ProgramsPage extends StatelessWidget {
   const ProgramsPage({super.key});
@@ -95,7 +97,7 @@ class ProgramsPage extends StatelessWidget {
 
               buildSection(
 
-                title: "Healthy Habits",
+                title: "Food & craving",
 
                 subtitle:
                     "Focused sessions to restore inner balance and wellbeing.",
@@ -270,123 +272,184 @@ class ProgramCard extends StatelessWidget {
   final String emoji;
 
   const ProgramCard({
-
     super.key,
-
     required this.title,
-
     required this.duration,
-
     required this.emoji,
   });
 
   @override
   Widget build(BuildContext context) {
 
-    return Container(
+    return GestureDetector(
 
-      padding: const EdgeInsets.all(14),
+      // ================= CARD CLICK ACTION =================
 
-      decoration: BoxDecoration(
+onTap: () {
 
-        color: Colors.white,
+  // ================= FOOD MANUAL PAGES =================
 
-        borderRadius:
-            BorderRadius.circular(16),
+  if (title == "Nicotine Relief" ||
+      title == "Appetite Control" ||
+      title == "Recovery") {
 
-        boxShadow: [
+ Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (_) => const DailyFlowPage(), // <-- New name
+  ),
+);
 
-          BoxShadow(
+  }
 
-            color:
-                Colors.black.withValues(
-              alpha: 0.03,
-            ),
+  // ================= PROGRAM DETAILS PAGE =================
 
-            blurRadius: 10,
+  else {
 
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
+    Navigator.push(
 
-      child: Column(
+      context,
 
-        crossAxisAlignment:
-            CrossAxisAlignment.start,
+      MaterialPageRoute(
 
-        children: [
+        builder: (_) => ProgramDetailsPage(
 
-          Text(
-            emoji,
-            style: const TextStyle(
-              fontSize: 40,
-            ),
-          ),
+          title: title,
 
-          const SizedBox(height: 10),
-
-          Expanded(
-
-            child: Text(
-
-              title,
-
-              maxLines: 2,
-
-              overflow:
-                  TextOverflow.ellipsis,
-
-              style: const TextStyle(
-
-                fontSize: 15,
-
-                fontWeight:
-                    FontWeight.w700,
-
-                height: 1.2,
-              ),
-            ),
-          ),
-
-          Container(
-
-            padding:
-                const EdgeInsets.symmetric(
-              horizontal: 8,
-              vertical: 4,
-            ),
-
-            decoration: BoxDecoration(
-
-              color:
-                  const Color(0xFFF4F6F8),
-
-              borderRadius:
-                  BorderRadius.circular(
-                8,
-              ),
-            ),
-
-            child: Text(
-
-              duration,
-
-              style: TextStyle(
-
-                fontSize: 11,
-
-                fontWeight:
-                    FontWeight.w600,
-
-                color:
-                    Colors.grey.shade700,
-              ),
-            ),
-          ),
-        ],
+          duration: duration,
+        ),
       ),
     );
-    
+  }
+},
+
+      child: Container(
+
+        padding: const EdgeInsets.all(16),
+
+        decoration: BoxDecoration(
+
+          color: Colors.white,
+
+          borderRadius:
+              BorderRadius.circular(20),
+
+          boxShadow: [
+
+            BoxShadow(
+
+              color:
+                  Colors.black.withValues(
+                alpha: 0.05,
+              ),
+
+              blurRadius: 12,
+
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+
+        child: Column(
+
+          crossAxisAlignment:
+              CrossAxisAlignment.start,
+
+          children: [
+
+            Text(
+
+              emoji,
+
+              style: const TextStyle(
+                fontSize: 42,
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            Expanded(
+
+              child: Text(
+
+                title,
+
+                maxLines: 2,
+
+                overflow:
+                    TextOverflow.ellipsis,
+
+                style: const TextStyle(
+
+                  fontSize: 16,
+
+                  fontWeight:
+                      FontWeight.w700,
+
+                  height: 1.3,
+                ),
+              ),
+            ),
+
+            Row(
+
+              children: [
+
+                Container(
+
+                  padding:
+                      const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 5,
+                  ),
+
+                  decoration: BoxDecoration(
+
+                    color:
+                        const Color(
+                      0xFFF4F6F8,
+                    ),
+
+                    borderRadius:
+                        BorderRadius.circular(
+                      10,
+                    ),
+                  ),
+
+                  child: Text(
+
+                    duration,
+
+                    style: TextStyle(
+
+                      fontSize: 11,
+
+                      fontWeight:
+                          FontWeight.w600,
+
+                      color:
+                          Colors.grey.shade700,
+                    ),
+                  ),
+                ),
+
+                const Spacer(),
+
+                const Icon(
+
+                  Icons.arrow_forward_ios_rounded,
+
+                  size: 14,
+
+                  color: Color(
+                    0xFF2FA7B2,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
