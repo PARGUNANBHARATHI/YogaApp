@@ -7,6 +7,10 @@ import 'food_manual_page.dart';
 import 'appetite_control_page.dart';
 import 'recovery_page.dart';
 
+// ====== ADD THIS IMPORT FOR THE NEW YOGA SCREEN ======
+// (Make sure the path matches where you saved the file from the previous step)
+import 'ProYogaFeedScreen.dart'; 
+
 class ProgramsPage extends StatelessWidget {
   const ProgramsPage({super.key});
 
@@ -64,7 +68,7 @@ class ProgramsPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Explore",
+                              "Persionlized",
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
@@ -116,14 +120,13 @@ class ProgramsPage extends StatelessWidget {
                   sliver: SliverList(
                     delegate: SliverChildListDelegate([
                       buildSection(
-                        title: "Mind & Body",
+                        title: "YOGA FOR Mind & Body",
                         subtitle: "Practices to balance energy and support unique needs.",
                         cards: const [
                            ProgramCard(title: "Guidelines", duration: "6 min", emoji: "🌸", themeColor: Color.fromARGB(255, 236, 72, 72)),
-                          ProgramCard(title: "Yoga", duration: "4 min", emoji: "🛡️", themeColor: Color(0xFFF59E0B)),
-                          ProgramCard(title: "Mundra", duration: "6 min", emoji: "🌸", themeColor: Color(0xFFEC4899)),
-                           ProgramCard(title: "Meditation", duration: "6 min", emoji: "🌸", themeColor: Color(0xFFEC4899)),
-                           
+                          ProgramCard(title: "Yoga", duration: "15+ min", emoji: "🧘🏽", themeColor: Color(0xFFF59E0B)), // Updated emoji and duration
+                          ProgramCard(title: "Mudra", duration: "6 min", emoji: "✨", themeColor: Color(0xFFEC4899)), // Fixed spelling & emoji
+                           ProgramCard(title: "Meditation", duration: "6 min", emoji: "🌿", themeColor: Color(0xFF8B5CF6)), // Updated emoji & color
                         ],
                       ),
                       const SizedBox(height: 32),
@@ -132,9 +135,10 @@ class ProgramsPage extends StatelessWidget {
                         title: "Food & Cravings",
                         subtitle: "Focused sessions to restore inner balance.",
                         cards: const [
-                          ProgramCard(title: "Daily Flow", duration: "2 min", emoji: "🌱", themeColor: Color(0xFF10B981)),
-                          ProgramCard(title: "Daily Habits", duration: "7 min", emoji: "🍏", themeColor: Color(0xFF2FA7B2)),
+                         
                           ProgramCard(title: "Food Management", duration: "7 min", emoji: "🕊️", themeColor: Color(0xFF8B5CF6)),
+                           ProgramCard(title: "Grocery list", duration: "2 min", emoji: "🕊️", themeColor: Color(0xFF8B5CF6)),
+                            ProgramCard(title: "Vegetable list", duration: "2 min", emoji: "🕊️", themeColor: Color(0xFF8B5CF6)),
                         ],
                       ),
                       const SizedBox(height: 32),
@@ -143,6 +147,8 @@ class ProgramsPage extends StatelessWidget {
                         title: "HABITS & ROUTINES ",
                         subtitle: "Simple daily practices to stay calm and energized.",
                         cards: const [
+                           ProgramCard(title: "Daily Flow", duration: "2 min", emoji: "🌱", themeColor: Color(0xFF10B981)),
+                          ProgramCard(title: "Daily Habits", duration: "7 min", emoji: "🍏", themeColor: Color(0xFF2FA7B2)),
                           ProgramCard(title: "Stress Relief", duration: "4 min", emoji: "🌳", themeColor: Color(0xFF10B981)),
                           ProgramCard(title: "Freedom", duration: "5 min", emoji: "🦋", themeColor: Color(0xFF3B82F6)),
                         ],
@@ -151,11 +157,11 @@ class ProgramsPage extends StatelessWidget {
 
                       buildSection(
                         title: "SELF-CARE & WELLNESS",
-                        subtitle: "Modern breathing practices inspired by yoga.",
+                        subtitle: "Design your own practices inspired by yoga.",
                         cards: const [
-                          ProgramCard(title: "Rhythmic Breathing", duration: "5 min", emoji: "🥁", themeColor: Color(0xFFF59E0B)),
-                          ProgramCard(title: "Box Breathing", duration: "6 min", emoji: "🧊", themeColor: Color(0xFF06B6D4)),
-                          ProgramCard(title: "Kapalabhati", duration: "3 min", emoji: "🐉", themeColor: Color(0xFFEF4444)),
+                          ProgramCard(title: "Weight Gain", duration: "5 min", emoji: "🥁", themeColor: Color(0xFFF59E0B)),
+                          ProgramCard(title: "Weight Loss", duration: "6 min", emoji: "🧊", themeColor: Color(0xFF06B6D4)),
+                          ProgramCard(title: "PCOD", duration: "3 min", emoji: "🐉", themeColor: Color(0xFFEF4444)),
                         ],
                       ),
                       const SizedBox(height: 40), // Bottom padding
@@ -205,9 +211,9 @@ class ProgramsPage extends StatelessWidget {
           itemCount: cards.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 16, // Increased spacing for a breathable look
+            crossAxisSpacing: 16, 
             mainAxisSpacing: 16,
-            mainAxisExtent: 175, // Slightly taller for the new design
+            mainAxisExtent: 175, 
           ),
           itemBuilder: (context, index) {
             return cards[index];
@@ -237,8 +243,11 @@ class ProgramCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // ================= NAVIGATION LOGIC (Kept Intact) =================
-        if (title == "Daily Flow") {
+        // ================= UPDATED NAVIGATION LOGIC =================
+        if (title == "Yoga") {
+          // Routes to the new Premium Video Feed we created!
+          Navigator.push(context, MaterialPageRoute(builder: (_) => const ProYogaFeedScreen()));
+        } else if (title == "Daily Flow") {
           Navigator.push(context, MaterialPageRoute(builder: (_) => const DailyFlowPage()));
         } else if (title == "Daily Habits") {
           Navigator.push(context, MaterialPageRoute(builder: (_) => const VathamRoutinePage()));
@@ -255,9 +264,9 @@ class ProgramCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.7), // Glass effect base
+          color: Colors.white.withValues(alpha: 0.7), 
           borderRadius: BorderRadius.circular(28),
-          border: Border.all(color: Colors.white, width: 2), // Glossy edge
+          border: Border.all(color: Colors.white, width: 2), 
           boxShadow: [
             BoxShadow(
               color: themeColor.withValues(alpha: 0.08),

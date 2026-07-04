@@ -236,7 +236,7 @@ class _MainPageState extends State<MainPage> {
 
             navItem(
               Icons.home_rounded,
-              "Home",
+              "Today",
               0,
             ),
 

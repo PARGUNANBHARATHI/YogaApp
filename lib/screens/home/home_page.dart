@@ -23,11 +23,11 @@ class _HomePageState extends State<HomePage> {
   int selectedCategory = 0;
 
   final List<String> categories = [
-    "All",
-    "Meditation",
-    "Stretch",
-    "Strength",
-    "Relax",
+    // "All",
+    // "Meditation",
+    // "Stretch",
+    // "Strength",
+    // "Relax",
   ];
 
   @override
