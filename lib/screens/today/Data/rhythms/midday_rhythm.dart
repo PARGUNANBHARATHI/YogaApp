@@ -78,13 +78,13 @@ const RhythmModel middayRhythm = RhythmModel(
     //--------------------------------------------------------
 
     ActivityModel(
-      id: "walk",
+      id: "Surya Namashakaram",
       title: "Short Walk",
-      subtitle: "Walk for 15 minutes",
+      subtitle: "DO for 15 minutes",
       image:
           "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200",
 
-      hour: 1,
+      hour: 13,
       minute: 30,
 
       durationMinutes: 20,
@@ -103,7 +103,7 @@ const RhythmModel middayRhythm = RhythmModel(
       image:
           "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200",
 
-      hour: 2,
+      hour: 14,
       minute: 30,
 
       durationMinutes: 10,

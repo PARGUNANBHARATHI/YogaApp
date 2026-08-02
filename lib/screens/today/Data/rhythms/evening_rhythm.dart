@@ -62,15 +62,15 @@ const RhythmModel eveningRhythm = RhythmModel(
 
     ActivityModel(
       id: "hydration",
-      title: "Hydration",
-      subtitle: "Drink a glass of water",
+      title: "Surya Namaskaram",
+      subtitle: " Do Surra namaskaram 5 min",
       image:
           "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=1200",
 
       hour: 16,
       minute: 0,
 
-      durationMinutes: 5,
+      durationMinutes: 15,
 
       type: ActivityType.hydration,
     ),

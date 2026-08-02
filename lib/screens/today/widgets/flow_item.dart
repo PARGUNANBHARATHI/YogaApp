@@ -18,33 +18,31 @@ class FlowItem extends StatelessWidget {
     required this.onTap,
   });
 
-  Color get statusColor {
-    switch (status.toLowerCase()) {
-      case "now":
-        return const Color(0xFF16A34A);
+  bool get isNow => status.toLowerCase() == "now";
 
-      case "done":
-        return const Color(0xFF2563EB);
-
-      default:
-        return const Color(0xFFF59E0B);
-    }
-  }
+  Color get statusColor => const Color(0xFF16A34A);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(22),
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
         margin: const EdgeInsets.only(bottom: 18),
         padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(22),
+          border: isNow
+              ? Border.all(
+                  color: statusColor,
+                  width: 2,
+                )
+              : null,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.04),
+              color: Colors.black.withValues(alpha: .04),
               blurRadius: 18,
               offset: const Offset(0, 8),
             ),
@@ -54,51 +52,53 @@ class FlowItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            //--------------------------------------------------
+            //----------------------------------------
             // TIME
-            //--------------------------------------------------
+            //----------------------------------------
 
             SizedBox(
-              width: 72,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 18),
-                child: Text(
-                  time,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                  ),
+              width: 78,
+              child: Text(
+                time,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),
 
-            //--------------------------------------------------
+            //----------------------------------------
             // ICON
-            //--------------------------------------------------
+            //----------------------------------------
 
             Container(
-              width: 58,
-              height: 58,
+              width: 56,
+              height: 56,
               decoration: BoxDecoration(
-                color: statusColor.withValues(alpha: .12),
+                color: isNow
+                    ? statusColor.withValues(alpha: .12)
+                    : const Color(0xFFF3F4F6),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Icon(
                 icon,
-                color: statusColor,
                 size: 28,
+                color: isNow
+                    ? statusColor
+                    : Colors.grey.shade700,
               ),
             ),
 
             const SizedBox(width: 16),
 
-            //--------------------------------------------------
+            //----------------------------------------
             // CONTENT
-            //--------------------------------------------------
+            //----------------------------------------
 
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment:
+                    CrossAxisAlignment.start,
                 children: [
 
                   Row(
@@ -108,56 +108,61 @@ class FlowItem extends StatelessWidget {
                         child: Text(
                           title,
                           maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                          overflow:
+                              TextOverflow.ellipsis,
                           style: const TextStyle(
                             fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                            fontWeight:
+                                FontWeight.bold,
                           ),
                         ),
                       ),
+
+                      if (isNow)
+                        Container(
+                          padding:
+                              const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: statusColor
+                                .withValues(alpha: .12),
+                            borderRadius:
+                                BorderRadius.circular(
+                                    20),
+                          ),
+                          child: Text(
+                            "NOW",
+                            style: TextStyle(
+                              color: statusColor,
+                              fontSize: 11,
+                              fontWeight:
+                                  FontWeight.bold,
+                              letterSpacing: .5,
+                            ),
+                          ),
+                        ),
 
                       const SizedBox(width: 8),
 
                       const Icon(
                         Icons.arrow_forward_ios_rounded,
                         size: 16,
-                        color: Colors.black54,
+                        color: Colors.grey,
                       ),
 
                     ],
                   ),
 
-                  const SizedBox(height: 8),
-
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 5,
-                    ),
-                    decoration: BoxDecoration(
-                      color: statusColor.withValues(alpha: .12),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Text(
-                      status,
-                      style: TextStyle(
-                        color: statusColor,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 11,
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 6),
 
                   Text(
                     subtitle,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      color: Colors.grey.shade600,
                       fontSize: 14,
-                      height: 1.45,
+                      color: Colors.grey.shade600,
+                      height: 1.4,
                     ),
                   ),
                 ],

@@ -83,14 +83,14 @@ class _MainPageState extends State<MainPage> {
           FloatingActionButtonLocation.centerDocked,
 
       floatingActionButton: Container(
-        height: 64,
-        width: 64,
+        height: 44,
+        width: 44,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: const LinearGradient(
             colors: [
-              Color(0xFF2FA7B2),
-              Color(0xFF58C4C9),
+              Color.fromARGB(255, 44, 47, 48),
+              Color.fromARGB(255, 52, 56, 56),
             ],
           ),
           boxShadow: [
@@ -102,7 +102,7 @@ class _MainPageState extends State<MainPage> {
           ],
         ),
         child: FloatingActionButton(
-          heroTag: "ai",
+          heroTag: "AI",
           backgroundColor: Colors.transparent,
           elevation: 0,
           onPressed: () {
@@ -113,7 +113,7 @@ class _MainPageState extends State<MainPage> {
           child: const Icon(
             Icons.auto_awesome_rounded,
             color: Colors.white,
-            size: 34,
+            size: 20,
           ),
         ),
       ),
@@ -123,7 +123,7 @@ class _MainPageState extends State<MainPage> {
       //-----------------------------------------
 
       bottomNavigationBar: Container(
-        height: 78,
+        height: 70,
         margin: const EdgeInsets.only(
           left: 16,
           right: 16,

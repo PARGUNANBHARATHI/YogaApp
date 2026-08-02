@@ -1,12 +1,27 @@
+//----------------------------------------------------------
+// IMPORTS
+//----------------------------------------------------------
+
 import '../models/activity_model.dart';
 import '../models/rhythm_model.dart';
+import '../models/timeline_item_model.dart';
 import '../models/wake_model.dart';
 
 import 'schedule_engine.dart';
 import 'wake_time_controller.dart';
 
+//==========================================================
+// TODAY CONTROLLER
+//==========================================================
+
 class TodayController {
-  final ScheduleEngine _engine = ScheduleEngine();
+
+  //----------------------------------------------------------
+  // CONTROLLERS
+  //----------------------------------------------------------
+
+  final ScheduleEngine _engine =
+      ScheduleEngine();
 
   final WakeTimeController _wakeController =
       WakeTimeController();
@@ -16,6 +31,7 @@ class TodayController {
   //----------------------------------------------------------
 
   Future<void> initialize() async {
+
     final WakeModel wakeTime =
         await _wakeController.loadWakeTime();
 
@@ -23,10 +39,11 @@ class TodayController {
   }
 
   //----------------------------------------------------------
-  // CHANGE WAKE TIME
+  // REFRESH WAKE TIME
   //----------------------------------------------------------
 
   Future<void> refreshWakeTime() async {
+
     final WakeModel wakeTime =
         await _wakeController.loadWakeTime();
 
@@ -50,47 +67,49 @@ class TodayController {
   }
 
   //----------------------------------------------------------
-  // TODAY FLOW
+  // TODAY TIMELINE
   //----------------------------------------------------------
 
-  List<ActivityModel> activities() {
-    return _engine.activities();
+  List<TimelineItem> todayTimeline() {
+    return _engine.todayTimeline();
   }
 
   //----------------------------------------------------------
-  // RHYTHM NAME
+  // REMAINING ACTIVITIES
   //----------------------------------------------------------
 
-  String rhythmName() {
-    return _engine.rhythmName();
+  List<ActivityModel> activities() {
+    return _engine.remainingActivities(
+      _engine.getCurrentRhythm(),
+    );
   }
 
   //----------------------------------------------------------
   // HERO
   //----------------------------------------------------------
 
-  String heroTitle() {
-    return _engine.heroTitle();
-  }
+  String heroTitle() =>
+      _engine.heroTitle();
 
-  String heroSubtitle() {
-    return _engine.heroSubtitle();
-  }
+  String heroSubtitle() =>
+      _engine.heroSubtitle();
 
-  String heroImage() {
-    return _engine.heroImage();
-  }
+  String heroImage() =>
+      _engine.heroImage();
 
-  String heroDuration() {
-    return _engine.heroDuration();
-  }
+  String heroDuration() =>
+      _engine.heroDuration();
 
   //----------------------------------------------------------
   // TIME
   //----------------------------------------------------------
 
-  String activityTime(ActivityModel activity) {
-    return _engine.activityTime(activity);
+  String activityTime(
+    ActivityModel activity,
+  ) {
+    return _engine.activityTime(
+      activity,
+    );
   }
 
   String currentTime() {
@@ -98,16 +117,39 @@ class TodayController {
   }
 
   //----------------------------------------------------------
-  // FUTURE
+  // RHYTHM
   //----------------------------------------------------------
-  //
-  // V2
-  // • Wake Time Settings
-  // • Notifications
-  //
-  // V3
-  // • AI Recommendation
-  // • Smart Band
-  //
+
+  String rhythmName() {
+    return _engine.rhythmName();
+  }
+
   //----------------------------------------------------------
+  // CURRENT INDEX
+  //----------------------------------------------------------
+
+  int currentActivityIndex() {
+
+    final timeline =
+        todayTimeline();
+
+    final current =
+        currentActivity();
+
+    for (int i = 0; i < timeline.length; i++) {
+
+      final item = timeline[i];
+
+      if (!item.isActivity) {
+        continue;
+      }
+
+      if (item.activity!.id ==
+          current.id) {
+        return i;
+      }
+    }
+
+    return -1;
+  }
 }

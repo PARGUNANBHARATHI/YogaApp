@@ -41,7 +41,7 @@ class YourMomentCard extends StatelessWidget {
               //--------------------------------------------------
 
               SizedBox(
-                height: 340,
+                height: 250,
                 width: double.infinity,
                 child: Image.network(
                   image,
