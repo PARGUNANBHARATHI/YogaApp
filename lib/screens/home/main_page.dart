@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'home_page.dart';
-import 'widgets/programs_page.dart';
-import 'shorts_page.dart';
-import 'ai_page.dart';
 import '../today/today_page.dart';
+import '../programs/pages/programs_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -18,11 +14,9 @@ class _MainPageState extends State<MainPage> {
 
   // DO NOT USE const HERE
   final List<Widget> pages = [
-    const HomePage(),
-    const ProgramsPage(),
-    const AiPage(),
-    const ShortsPage(),
+  
     TodayPage(),
+    ProgramsPage(),
   ];
 
   Widget navItem(
@@ -75,49 +69,7 @@ class _MainPageState extends State<MainPage> {
         children: pages,
       ),
 
-      //-----------------------------------------
-      // AI BUTTON
-      //-----------------------------------------
-
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.centerDocked,
-
-      floatingActionButton: Container(
-        height: 44,
-        width: 44,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          gradient: const LinearGradient(
-            colors: [
-              Color.fromARGB(255, 44, 47, 48),
-              Color.fromARGB(255, 52, 56, 56),
-            ],
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xFF2FA7B2).withOpacity(.35),
-              blurRadius: 20,
-              offset: const Offset(0, 8),
-            ),
-          ],
-        ),
-        child: FloatingActionButton(
-          heroTag: "AI",
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          onPressed: () {
-            setState(() {
-              currentIndex = 2;
-            });
-          },
-          child: const Icon(
-            Icons.auto_awesome_rounded,
-            color: Colors.white,
-            size: 20,
-          ),
-        ),
-      ),
-
+      
       //-----------------------------------------
       // BOTTOM NAVIGATION
       //-----------------------------------------
@@ -144,32 +96,32 @@ class _MainPageState extends State<MainPage> {
           mainAxisAlignment:
               MainAxisAlignment.spaceAround,
           children: [
-
-            navItem(
-              Icons.home_rounded,
-              "Home",
+navItem(
+              Icons.calendar_today_rounded,
+              "Today",
               0,
             ),
+            // navItem(
+            //   Icons.home_rounded,
+            //   "Home",
+            //   0,
+            // ),
 
             navItem(
               Icons.dashboard_rounded,
               "Programs",
               1,
-            ),
+             ),
 
-            const SizedBox(width: 70),
+            // const SizedBox(width: 70),
 
-            navItem(
-              Icons.play_circle_fill_rounded,
-              "Shorts",
-              3,
-            ),
+            // navItem(
+            //   Icons.play_circle_fill_rounded,
+            //   "Shorts",
+            //   3,
+            // ),
 
-            navItem(
-              Icons.calendar_today_rounded,
-              "Today",
-              4,
-            ),
+            
           ],
         ),
       ),

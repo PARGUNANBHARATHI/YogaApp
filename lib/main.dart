@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'core/theme/app_theme.dart';
 import 'screens/home/main_page.dart';
-
+// import 'screens/programs/pages/programs_page.dart'
 void main() {
   runApp(const YogaApp());
 }
@@ -20,6 +20,7 @@ class YogaApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
 
       home: const MainPage(),
+      
     );
   }
 }

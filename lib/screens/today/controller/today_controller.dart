@@ -78,7 +78,7 @@ class TodayController {
   // REMAINING ACTIVITIES
   //----------------------------------------------------------
 
-  List<ActivityModel> activities() {
+  List<ActivityModel>remainingActivities() {
     return _engine.remainingActivities(
       _engine.getCurrentRhythm(),
     );
