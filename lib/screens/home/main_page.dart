@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../today/today_page.dart';
 import '../programs/pages/programs_page.dart';
+import '../irai/pages/irai_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -10,14 +12,26 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
+  //----------------------------------------------------------
+  // CURRENT PAGE
+  //----------------------------------------------------------
+
   int currentIndex = 0;
 
-  // DO NOT USE const HERE
-  final List<Widget> pages = [
-  
+  //----------------------------------------------------------
+  // PAGES
+  //----------------------------------------------------------
+
+  final List<Widget> pages = const [
     TodayPage(),
+    IraiPage(),
     ProgramsPage(),
   ];
+
+  //----------------------------------------------------------
+  // NORMAL NAVIGATION ITEM
+  //----------------------------------------------------------
 
   Widget navItem(
     IconData icon,
@@ -32,25 +46,147 @@ class _MainPageState extends State<MainPage> {
           currentIndex = index;
         });
       },
+
       borderRadius: BorderRadius.circular(16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            size: 24,
-            color: isSelected
-                ? const Color(0xFF2FA7B2)
-                : Colors.grey,
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
+
+      child: SizedBox(
+        width: 70,
+        height: 65,
+
+        child: Column(
+          mainAxisAlignment:
+              MainAxisAlignment.center,
+
+          children: [
+
+            Icon(
+              icon,
+              size: 23,
+
               color: isSelected
                   ? const Color(0xFF2FA7B2)
+                  : Colors.grey,
+            ),
+
+            const SizedBox(height: 4),
+
+            Text(
+              label,
+
+              style: TextStyle(
+                fontSize: 11,
+
+                fontWeight:
+                    FontWeight.w600,
+
+                color: isSelected
+                    ? const Color(0xFF2FA7B2)
+                    : Colors.grey,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  //----------------------------------------------------------
+  // IRAI CENTER BUTTON
+  //----------------------------------------------------------
+
+  Widget iraiNavItem() {
+
+    final isSelected =
+        currentIndex == 1;
+
+    return InkWell(
+      onTap: () {
+        setState(() {
+          currentIndex = 1;
+        });
+      },
+
+      borderRadius:
+          BorderRadius.circular(40),
+
+      child: Column(
+        mainAxisAlignment:
+            MainAxisAlignment.center,
+
+        children: [
+
+          AnimatedContainer(
+            duration:
+                const Duration(
+              milliseconds: 220,
+            ),
+
+            width: isSelected
+                ? 56
+                : 52,
+
+            height: isSelected
+                ? 56
+                : 52,
+
+            decoration: BoxDecoration(
+              gradient:
+                  const LinearGradient(
+                begin:
+                    Alignment.topLeft,
+
+                end:
+                    Alignment.bottomRight,
+
+                colors: [
+                  Color(0xFF2FA7B2),
+                  Color(0xFF65C7C1),
+                ],
+              ),
+
+              shape: BoxShape.circle,
+
+              boxShadow: [
+                BoxShadow(
+                  color:
+                      const Color(
+                    0xFF2FA7B2,
+                  ).withValues(
+                    alpha: .28,
+                  ),
+
+                  blurRadius: 16,
+
+                  offset:
+                      const Offset(0, 6),
+                ),
+              ],
+            ),
+
+            child: const Icon(
+              Icons.auto_awesome_rounded,
+
+              color: Colors.white,
+
+              size: 25,
+            ),
+          ),
+
+          const SizedBox(height: 2),
+
+          Text(
+            "IRAI",
+
+            style: TextStyle(
+              fontSize: 11,
+
+              fontWeight:
+                  FontWeight.w700,
+
+              color: isSelected
+                  ? const Color(
+                      0xFF2FA7B2,
+                    )
                   : Colors.grey,
             ),
           ),
@@ -59,69 +195,100 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+  //----------------------------------------------------------
+  // BUILD
+  //----------------------------------------------------------
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+
       extendBody: true,
+
+      //--------------------------------------------------------
+      // CURRENT PAGE
+      //--------------------------------------------------------
 
       body: IndexedStack(
         index: currentIndex,
+
         children: pages,
       ),
 
-      
-      //-----------------------------------------
+      //--------------------------------------------------------
       // BOTTOM NAVIGATION
-      //-----------------------------------------
+      //--------------------------------------------------------
 
-      bottomNavigationBar: Container(
-        height: 70,
-        margin: const EdgeInsets.only(
+      bottomNavigationBar:
+          Container(
+
+        height: 76,
+
+        margin:
+            const EdgeInsets.only(
           left: 16,
           right: 16,
           bottom: 16,
         ),
-        decoration: BoxDecoration(
+
+        decoration:
+            BoxDecoration(
+
           color: Colors.white,
-          borderRadius: BorderRadius.circular(28),
+
+          borderRadius:
+              BorderRadius.circular(
+            28,
+          ),
+
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(.08),
+              color:
+                  Colors.black.withValues(
+                alpha: .08,
+              ),
+
               blurRadius: 20,
-              offset: const Offset(0, 5),
+
+              offset:
+                  const Offset(0, 5),
             ),
           ],
         ),
+
         child: Row(
+
           mainAxisAlignment:
               MainAxisAlignment.spaceAround,
+
           children: [
-navItem(
+
+            //------------------------------------------------
+            // TODAY
+            //------------------------------------------------
+
+            navItem(
               Icons.calendar_today_rounded,
               "Today",
               0,
             ),
-            // navItem(
-            //   Icons.home_rounded,
-            //   "Home",
-            //   0,
-            // ),
+
+            //------------------------------------------------
+            // IRAI
+            //------------------------------------------------
+
+            iraiNavItem(),
+
+            //------------------------------------------------
+            // PROGRAMS
+            //------------------------------------------------
 
             navItem(
               Icons.dashboard_rounded,
               "Programs",
-              1,
-             ),
-
-            // const SizedBox(width: 70),
-
-            // navItem(
-            //   Icons.play_circle_fill_rounded,
-            //   "Shorts",
-            //   3,
-            // ),
-
-            
+              2,
+            ),
           ],
         ),
       ),
